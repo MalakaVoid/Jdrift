@@ -18,7 +18,7 @@
     </div>
     <!-- /wp:group -->
 
-    <!-- wp:query {"queryId":22,"query":{"perPage":"2","pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false},"className":"photolancer-slide-up"} -->
+    <!-- wp:query {"queryId":22,"query":{"perPage":"2","pages":0,"offset":0,"postType":"custom_data","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false},"className":"photolancer-slide-up"} -->
     <div class="wp-block-query photolancer-slide-up"><!-- wp:post-template {"style":{"spacing":{"blockGap":"32px"}},"layout":{"type":"grid","columnCount":"2"}} -->
         <!-- wp:group {"className":"is-style-photolancer-boxshadow-medium","style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"}},"border":{"radius":"20px"}},"layout":{"type":"constrained"}} -->
         <div class="wp-block-group is-style-photolancer-boxshadow-medium" style="border-radius:20px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:cover {"useFeaturedImage":true,"dimRatio":0,"customOverlayColor":"#2b342e","isUserOverlayColor":true,"minHeight":380,"contentPosition":"bottom left","isDark":false,"style":{"border":{"radius":"20px"},"spacing":{"margin":{"bottom":"0px"}}},"layout":{"type":"constrained"}} -->

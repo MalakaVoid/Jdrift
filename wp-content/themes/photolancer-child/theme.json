@@ -634,6 +634,11 @@
       "name": "sidebar",
       "title": "Sidebar",
       "area": "uncategorized"
+    },
+    {
+      "name": "like-counter",
+      "title": "like-counter",
+      "area": "uncategorized"
     }
   ],
   "customTemplates": [
