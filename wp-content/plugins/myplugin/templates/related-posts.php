@@ -1,6 +1,5 @@
 <?php
 
-// Проверяем наличие постов
 if ($query->have_posts()) : ?>
 
     <div class="related_posts">
@@ -41,6 +40,6 @@ if ($query->have_posts()) : ?>
 
 <?php else : ?>
 
-    <p><?php _e('No posts found', 'j-drift.ru'); ?></p>
+    <p></p>
 
 <?php endif; ?>

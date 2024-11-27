@@ -1,6 +1,5 @@
 <?php
 
-// Проверяем наличие постов
 if ($query->have_posts()) : ?>
 
     <div class="popular_posts">

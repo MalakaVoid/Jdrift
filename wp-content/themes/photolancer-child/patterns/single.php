@@ -10,7 +10,7 @@
 <!-- wp:template-part {"slug":"header","area":"header"} /-->
 
 
-<!-- wp:group {"tagName":"main","style":{"border":{"top":{"width":"0px","style":"none"},"bottom":{"width":"0px","style":"none"}},"spacing":{"padding":{"top":"64px","left":"var:preset|spacing|40","right":"var:preset|spacing|40","bottom":"64px"},"margin":{"top":"0","bottom":"0"}}},"backgroundColor":"light-color","layout":{"type":"constrained","contentSize":"100%"}} -->
+<!-- wp:group {"tagName":"main","style":{"border":{"top":{"width":"0px","style":"none"},"bottom":{"width":"0px","style":"none"}},"spacing":{"padding":{"top":"64px","left":"0","right":"0","bottom":"64px"},"margin":{"top":"0","bottom":"0"}}},"backgroundColor":"light-color","layout":{"type":"constrained","contentSize":"100%"}} -->
 <main
   class="wp-block-group has-light-color-background-color has-background"
   style="border-top-style: none; border-top-width: 0px; border-bottom-style: none; border-bottom-width: 0px; margin-top: 0; margin-bottom: 0; padding-top: 64px; padding-right: var(--wp--preset--spacing--40); padding-bottom: 64px; padding-left: var(--wp--preset--spacing--40)">
@@ -18,7 +18,7 @@
   <div class="wp-block-group" style="padding-top: 0; padding-right: var(--wp--preset--spacing--50); padding-bottom: var(--wp--preset--spacing--70); padding-left: var(--wp--preset--spacing--50)">
     <!-- wp:group {"style":{"spacing":{"padding":{"top":"0","bottom":"var:preset|spacing|30"}},"border":{"bottom":{"color":"var:preset|color|border-color","width":"1px"},"top":[],"right":[],"left":[]}},"layout":{"type":"constrained","contentSize":"100%"}} -->
     <div class="wp-block-group" style="border-bottom-color: var(--wp--preset--color--border-color); border-bottom-width: 1px; padding-top: 0; padding-bottom: var(--wp--preset--spacing--30)">
-      <!-- wp:post-featured-image {"isLink":true,"height":"580px","style":{"border":{"radius":"0px"}}} /-->
+      <!-- wp:post-featured-image {"isLink":true,"height":"580px","style":{"border":{"radius":"0px"}},"className":"single-image-custom"} /-->
 
       <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|20","padding":{"top":"var:preset|spacing|40"}}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
       <div class="wp-block-group" style="padding-top: var(--wp--preset--spacing--40)">

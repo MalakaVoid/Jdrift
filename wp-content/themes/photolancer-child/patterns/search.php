@@ -25,7 +25,7 @@
 
         <!-- wp:post-excerpt {"excerptLength":29} /-->
 
-        <a href="<?php the_permalink(); ?>">
+        <a href="<?php the_permalink(); ?>" style="width: 100%; display: block;">
             <!-- wp:post-featured-image {"style":{"spacing":{"margin":{"top":"0","right":"0","bottom":"0","left":"0"},"padding":{"top":"0","right":"0","bottom":"0","left":"0"}},"dimensions":{"width":"100%"}}} /-->
         </a>
 

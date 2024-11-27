@@ -3,7 +3,7 @@
  * Plugin Name: Custom Post Type Plugin
  * Description: Creates a custom post type with title, description, image, date, likes, and related posts.
  * Version: 1.0
- * Author: Your Name
+ * Author: Azbukin Daniil
  */
 
 class CustomPostTypePlugin {
@@ -22,13 +22,20 @@ class CustomPostTypePlugin {
         add_shortcode('all_custom_posts', [$this, 'display_all_posts_shortcode']);
         add_action('wp_ajax_load_more_posts', [$this, 'load_more_posts']);
         add_action('wp_ajax_nopriv_load_more_posts', [$this, 'load_more_posts']);
+        add_action('wp_ajax_increment_likes', [$this, 'increment_likes']);
+        add_action('wp_ajax_nopriv_increment_likes', [$this, 'increment_likes']);
         add_action('wp_enqueue_scripts', function() {
             wp_enqueue_script('custom-posts-load-more', plugin_dir_url(__FILE__) . 'js/load-more.js', ['jquery'], null, true);
+            wp_enqueue_script('custom-posts-like', plugin_dir_url(__FILE__) . 'js/like-button.js', ['jquery'], null, true);
+            
+            wp_localize_script('custom-posts-like', 'likeButtonAjax', array(
+                'ajax_url' => admin_url('admin-ajax.php')
+            ));
         });
+        
     }
     
 
-    // Register the custom post type
     public function register_custom_post_type() {
         register_post_type(self::POST_TYPE, [
             'labels' => [
@@ -45,22 +52,20 @@ class CustomPostTypePlugin {
             'menu_icon' => 'dashicons-database',
             'has_archive' => true,
             'exclude_from_search' => false,
-            'supports' => ['title', 'editor', 'thumbnail'], // Title, description, and image
+            'supports' => ['title', 'editor', 'thumbnail'],
             'show_in_rest' => true,
         ]);
     }
 
-    // Register meta boxes
     public function register_meta_boxes() {
         add_meta_box('custom_meta_box', 'Custom Fields', [$this, 'render_meta_boxes'], self::POST_TYPE, 'side', 'high');
     }
 
-    // Render the meta boxes
     public function render_meta_boxes($post) {
         $custom_date = get_post_meta($post->ID, '_custom_date', true);
         $likes = get_post_meta($post->ID, '_custom_likes', true);
         $related_posts = get_post_meta($post->ID, '_custom_related_posts', true);
-
+    
         wp_nonce_field('custom_meta_box_nonce_action', 'custom_meta_box_nonce');
         ?>
         <p>
@@ -75,7 +80,14 @@ class CustomPostTypePlugin {
             <label for="custom_related_posts">Related Posts:</label>
             <select id="custom_related_posts" name="custom_related_posts[]" multiple style="width: 100%;">
                 <?php
-                $query = new WP_Query(['post_type' => self::POST_TYPE, 'posts_per_page' => -1]);
+                $current_post_id = $post->ID;
+    
+                $query = new WP_Query([
+                    'post_type' => self::POST_TYPE,
+                    'posts_per_page' => -1,
+                    'post__not_in' => [$current_post_id],
+                ]);
+    
                 while ($query->have_posts()) : $query->the_post();
                     $selected = is_array($related_posts) && in_array(get_the_ID(), $related_posts) ? 'selected' : '';
                     echo '<option value="' . get_the_ID() . '" ' . $selected . '>' . get_the_title() . '</option>';
@@ -86,8 +98,8 @@ class CustomPostTypePlugin {
         </p>
         <?php
     }
+    
 
-    // Save meta data
     public function save_meta_data($post_id) {
         if (!isset($_POST['custom_meta_box_nonce']) || !wp_verify_nonce($_POST['custom_meta_box_nonce'], 'custom_meta_box_nonce_action')) {
             return;
@@ -144,7 +156,7 @@ class CustomPostTypePlugin {
             'orderby' => 'meta_value',
             'meta_key' => '_custom_likes',
             'order' => 'ASC',
-            'posts_per_page' => 6,
+            'posts_per_page' => 4,
         );
 
         
@@ -217,6 +229,20 @@ class CustomPostTypePlugin {
     
         wp_reset_postdata();
         wp_die();
+    }
+
+    public function increment_likes() {
+        if (!isset($_POST['post_id'])) {
+            wp_send_json_error('Post ID not set');
+        }
+    
+        $post_id = intval($_POST['post_id']);
+        $likes = get_post_meta($post_id, '_custom_likes', true);
+        $likes = $likes ? intval($likes) : 0;
+        $likes++;
+        update_post_meta($post_id, '_custom_likes', $likes);
+    
+        wp_send_json_success(['likes' => $likes]);
     }
 
 }
