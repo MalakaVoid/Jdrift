@@ -50,8 +50,9 @@ class CustomPostTypePlugin {
             ],
             'public' => true,
             'menu_icon' => 'dashicons-database',
-            'has_archive' => true,
+            'has_archive' => false,
             'exclude_from_search' => false,
+            'rewrite' => array('slug' => 'statya'),
             'supports' => ['title', 'editor', 'thumbnail'],
             'show_in_rest' => true,
         ]);
